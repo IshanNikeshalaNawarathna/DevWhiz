@@ -1,0 +1,16 @@
+services:
+  # Our PostgreSQL database
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: changemeinprod!
+
+  # Database management interface
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - "8888:8080"
