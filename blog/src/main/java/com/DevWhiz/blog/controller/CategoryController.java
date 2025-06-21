@@ -1,13 +1,15 @@
 package com.DevWhiz.blog.controller;
 
 import com.DevWhiz.blog.domain.dtos.CategoryDto;
+import com.DevWhiz.blog.domain.dtos.CreateCategoryRequest;
+import com.DevWhiz.blog.domain.entity.Category;
 import com.DevWhiz.blog.domain.mapper.CategoryMapper;
 import com.DevWhiz.blog.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,16 +21,23 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @Autowired
-    private CategoryMapper mapper;
+    private CategoryMapper categoryMapper;
 
     @GetMapping
-    public ResponseEntity<List<CategoryDto>> listCategory(){
+    public ResponseEntity<List<CategoryDto>> listCategory() {
 
         List<CategoryDto> categories = categoryService.listCategories()
-                .stream().map(category -> mapper.toDto(category))
+                .stream().map(category -> categoryMapper.toDto(category))
                 .toList();
 
         return ResponseEntity.ok(categories);
+    }
+
+    @PostMapping
+    public ResponseEntity<CategoryDto> saveCategory(@Valid @RequestBody CreateCategoryRequest createCategoryRequest) {
+        Category category = categoryMapper.toEntity(createCategoryRequest);
+        Category saveCategory = categoryService.createCategory(category);
+        return new ResponseEntity<>(categoryMapper.toDto(saveCategory), HttpStatus.CREATED);
     }
 
 }

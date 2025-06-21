@@ -3,6 +3,7 @@ package com.DevWhiz.blog.service.impl;
 import com.DevWhiz.blog.domain.entity.Category;
 import com.DevWhiz.blog.repo.CategoryRepo;
 import com.DevWhiz.blog.service.CategoryService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,16 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> listCategories() {
         return categoryRepo.findAllWithPostCount();
+    }
+
+    @Override
+    @Transactional
+    public Category createCategory(Category category) {
+
+        String categoryName = category.getName();
+        if (categoryRepo.existsByName(categoryName)) {
+            throw new IllegalArgumentException("Category name already exists" + categoryName);
+        }
+        return categoryRepo.save(category);
     }
 }
