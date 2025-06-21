@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -29,5 +31,16 @@ public class CategoryServiceImpl implements CategoryService {
             throw new IllegalArgumentException("Category name already exists" + categoryName);
         }
         return categoryRepo.save(category);
+    }
+
+    @Override
+    public void deleteCategory(UUID id) {
+        Optional<Category> byId = categoryRepo.findById(id);
+        if(byId.isPresent()) {
+            if(!byId.get().getPosts().isEmpty()){
+                throw new IllegalStateException("There are posts in this Category");
+            }
+            categoryRepo.deleteById(id);
+        }
     }
 }
