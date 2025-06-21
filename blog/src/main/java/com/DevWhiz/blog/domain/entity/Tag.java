@@ -3,7 +3,9 @@ package com.DevWhiz.blog.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +22,9 @@ public class Tag {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    @ManyToMany(mappedBy = "tags")
+    private Set<Tag> tags = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
