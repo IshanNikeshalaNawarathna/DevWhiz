@@ -1,6 +1,7 @@
 package com.DevWhiz.blog.service.impl;
 
 import com.DevWhiz.blog.service.AuthenticationService;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -32,7 +33,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public UserDetails authenticate(String email, String password) {
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email,password));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         return userDetailsService.loadUserByUsername(email);
     }
 
@@ -49,6 +50,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .signWith(getSigningKey(), SignatureAlgorithm.ES256)
                 .compact();
 
+    }
+
+    @Override
+    public UserDetails validateToken(String token) {
+        String username = extractUsername(token);
+        return userDetailsService.loadUserByUsername(username);
+    }
+
+    private String extractUsername(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
     }
 
     private Key getSigningKey() {
