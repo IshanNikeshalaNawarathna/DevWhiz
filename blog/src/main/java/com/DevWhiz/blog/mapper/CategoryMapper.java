@@ -1,4 +1,4 @@
-package com.DevWhiz.blog.domain.mapper;
+package com.DevWhiz.blog.mapper;
 
 import com.DevWhiz.blog.domain.PostStatus;
 import com.DevWhiz.blog.domain.dtos.*;

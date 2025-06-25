@@ -3,7 +3,7 @@ package com.DevWhiz.blog.controller;
 import com.DevWhiz.blog.domain.dtos.CategoryDto;
 import com.DevWhiz.blog.domain.dtos.CreateCategoryRequest;
 import com.DevWhiz.blog.domain.entity.Category;
-import com.DevWhiz.blog.domain.mapper.CategoryMapper;
+import com.DevWhiz.blog.mapper.CategoryMapper;
 import com.DevWhiz.blog.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
