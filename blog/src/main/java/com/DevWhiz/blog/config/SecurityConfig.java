@@ -49,6 +49,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth->auth
                 .requestMatchers(HttpMethod.POST,"/api/v1/auth/login").permitAll()
                 .requestMatchers(HttpMethod.GET,"/api/v1/categories/**").permitAll()
+                .requestMatchers(HttpMethod.POST,"/api/v1/categories/**").permitAll()
                 .requestMatchers(HttpMethod.POST,"/api/v1/posts/**").permitAll()
                 .requestMatchers(HttpMethod.POST,"/api/v1/tags/**").permitAll()
         ).csrf(csrf->csrf.disable())

@@ -6,6 +6,7 @@ import com.DevWhiz.blog.domain.entity.Category;
 import com.DevWhiz.blog.mapper.CategoryMapper;
 import com.DevWhiz.blog.service.CategoryService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/api/v1/categories")
+@RequiredArgsConstructor
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private CategoryMapper categoryMapper;
+    private final CategoryService categoryService;
+    private final CategoryMapper categoryMapper;
 
     @GetMapping
     public ResponseEntity<List<CategoryDto>> listCategory() {
