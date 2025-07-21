@@ -1,5 +1,6 @@
 package com.DevWhiz.blog.config;
 
+import com.DevWhiz.blog.domain.entity.User;
 import com.DevWhiz.blog.repo.UserRepo;
 import com.DevWhiz.blog.security.BlogUserDetailService;
 import com.DevWhiz.blog.security.JwtAuthenticationFilter;
@@ -27,7 +28,19 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(UserRepo userRepo){
-        return new BlogUserDetailService(userRepo);
+        BlogUserDetailService blogUserDetailService = new BlogUserDetailService(userRepo);
+
+        String email = "test@gmail.com";
+        userRepo.findByEmail(email).orElseGet(()->{
+            User saveUser = User.builder()
+                    .name("test")
+                    .email(email)
+                    .password(passwordEncoder().encode("1122"))
+                    .build();
+            return userRepo.save(saveUser);
+        });
+
+        return blogUserDetailService;
     }
 
     @Bean
@@ -36,6 +49,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth->auth
                 .requestMatchers(HttpMethod.POST,"/api/v1/auth/login").permitAll()
                 .requestMatchers(HttpMethod.GET,"/api/v1/categories/**").permitAll()
+                .requestMatchers(HttpMethod.POST,"/api/v1/categories/**").permitAll()
                 .requestMatchers(HttpMethod.POST,"/api/v1/posts/**").permitAll()
                 .requestMatchers(HttpMethod.POST,"/api/v1/tags/**").permitAll()
         ).csrf(csrf->csrf.disable())
