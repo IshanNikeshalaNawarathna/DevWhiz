@@ -1,17 +1,20 @@
-package com.DevWhiz.blog.domain.dtos;
+package com.DevWhiz.blog.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LoginRequest {
+public class CategoryDto {
 
-    private String email;
-    private String password;
+    private UUID id;
+    private String name;
+    private long postCount;
 
 }

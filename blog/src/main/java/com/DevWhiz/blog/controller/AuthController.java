@@ -1,7 +1,7 @@
 package com.DevWhiz.blog.controller;
 
-import com.DevWhiz.blog.domain.dtos.AuthResponse;
-import com.DevWhiz.blog.domain.dtos.LoginRequest;
+import com.DevWhiz.blog.domain.dto.AuthResponse;
+import com.DevWhiz.blog.domain.dto.LoginRequest;
 import com.DevWhiz.blog.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

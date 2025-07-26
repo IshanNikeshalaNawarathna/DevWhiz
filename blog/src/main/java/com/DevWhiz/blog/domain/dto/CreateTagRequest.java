@@ -1,4 +1,4 @@
-package com.DevWhiz.blog.domain.dtos;
+package com.DevWhiz.blog.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;

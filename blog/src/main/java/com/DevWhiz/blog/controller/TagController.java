@@ -1,7 +1,7 @@
 package com.DevWhiz.blog.controller;
 
-import com.DevWhiz.blog.domain.dtos.CreateTagRequest;
-import com.DevWhiz.blog.domain.dtos.TagResponse;
+import com.DevWhiz.blog.domain.dto.CreateTagRequest;
+import com.DevWhiz.blog.domain.dto.TagDto;
 import com.DevWhiz.blog.domain.entity.Tag;
 import com.DevWhiz.blog.mapper.TagMapper;
 import com.DevWhiz.blog.service.TagService;
@@ -24,17 +24,17 @@ public class TagController {
 
 
     @GetMapping
-    public ResponseEntity<List<TagResponse>> getAllTags() {
+    public ResponseEntity<List<TagDto>> getAllTags() {
         List<Tag> tags = tagService.getTags();
-        List<TagResponse> list = tags.stream().map(tag -> tagMapper.toDto(tag)).collect(Collectors.toList());
+        List<TagDto> list = tags.stream().map(tag -> tagMapper.toDto(tag)).collect(Collectors.toList());
         return ResponseEntity.ok(list);
     }
 
     @PostMapping
-    public ResponseEntity<List<TagResponse>> addTag(@RequestBody CreateTagRequest createTagRequest) {
+    public ResponseEntity<List<TagDto>> addTag(@RequestBody CreateTagRequest createTagRequest) {
         List<Tag> saveTag = tagService.createTag(createTagRequest.getName());
-        List<TagResponse> createTagResponse = saveTag.stream().map(tag -> tagMapper.toDto(tag)).collect(Collectors.toList());
-        return new ResponseEntity<>(createTagResponse, HttpStatus.CREATED);
+        List<TagDto> createTagDto = saveTag.stream().map(tag -> tagMapper.toDto(tag)).collect(Collectors.toList());
+        return new ResponseEntity<>(createTagDto, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

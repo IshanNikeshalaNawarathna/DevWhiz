@@ -3,6 +3,7 @@ package com.DevWhiz.blog.service.impl;
 import com.DevWhiz.blog.domain.entity.Category;
 import com.DevWhiz.blog.repo.CategoryRepo;
 import com.DevWhiz.blog.service.CategoryService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,10 @@ public class CategoryServiceImpl implements CategoryService {
             }
             categoryRepo.deleteById(id);
         }
+    }
+
+    @Override
+    public Category findById(UUID id) {
+       return categoryRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Category not found with id " + id));
     }
 }

@@ -1,4 +1,4 @@
-package com.DevWhiz.blog.domain.dtos;
+package com.DevWhiz.blog.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,13 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class CategoryDto {
-
+public class TagDto {
     private UUID id;
     private String name;
-    private long postCount;
-
+    private Integer postCount;
 }

@@ -1,7 +1,7 @@
 package com.DevWhiz.blog.mapper;
 
 import com.DevWhiz.blog.domain.PostStatus;
-import com.DevWhiz.blog.domain.dtos.*;
+import com.DevWhiz.blog.domain.dto.*;
 import com.DevWhiz.blog.domain.entity.Category;
 import com.DevWhiz.blog.domain.entity.Post;
 import org.mapstruct.Mapper;
@@ -23,7 +23,7 @@ public interface CategoryMapper {
     default long calculatePostCount(List<Post> posts) {
 
         if (posts == null) return 0;
-        return posts.stream().filter(post -> PostStatus.PUBLISHED.equals(post.getStatus())).count();
+        return posts.stream().filter(post -> PostStatus.PUBLISHED.equals(post.getPostStatus())).count();
 
     }
 

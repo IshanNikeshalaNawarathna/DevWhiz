@@ -1,13 +1,12 @@
 package com.DevWhiz.blog.controller;
 
-import com.DevWhiz.blog.domain.dtos.CategoryDto;
-import com.DevWhiz.blog.domain.dtos.CreateCategoryRequest;
+import com.DevWhiz.blog.domain.dto.CategoryDto;
+import com.DevWhiz.blog.domain.dto.CreateCategoryRequest;
 import com.DevWhiz.blog.domain.entity.Category;
 import com.DevWhiz.blog.mapper.CategoryMapper;
 import com.DevWhiz.blog.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
