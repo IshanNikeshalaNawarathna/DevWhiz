@@ -4,6 +4,7 @@ import com.DevWhiz.blog.domain.PostStatus;
 import com.DevWhiz.blog.domain.entity.Category;
 import com.DevWhiz.blog.domain.entity.Post;
 import com.DevWhiz.blog.domain.entity.Tag;
+import com.DevWhiz.blog.domain.entity.User;
 import com.DevWhiz.blog.repo.PostRepo;
 import com.DevWhiz.blog.service.CategoryService;
 import com.DevWhiz.blog.service.PostService;
@@ -55,5 +56,10 @@ public class PostServiceImpl implements PostService {
             );
         }
         return postRepo.findAllByPostStatus(PostStatus.PUBLISHED);
+    }
+
+    @Override
+    public List<Post> getAllDraftPosts(User user) {
+        return postRepo.findAllByAuthorAndPostStatus(user, PostStatus.DRAFT);
     }
 }
