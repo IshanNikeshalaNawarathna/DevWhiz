@@ -3,7 +3,10 @@ package com.DevWhiz.blog.service.impl;
 import com.DevWhiz.blog.domain.entity.Category;
 import com.DevWhiz.blog.repo.CategoryRepo;
 import com.DevWhiz.blog.service.CategoryService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +14,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
-    private CategoryRepo categoryRepo;
+    private final CategoryRepo categoryRepo;
 
     @Override
     public List<Category> listCategories() {
@@ -42,5 +46,10 @@ public class CategoryServiceImpl implements CategoryService {
             }
             categoryRepo.deleteById(id);
         }
+    }
+
+    @Override
+    public Category findById(UUID id) {
+       return categoryRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Category not found with id " + id));
     }
 }

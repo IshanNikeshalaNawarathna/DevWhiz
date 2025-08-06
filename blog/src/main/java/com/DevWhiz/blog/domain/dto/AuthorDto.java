@@ -1,4 +1,4 @@
-package com.DevWhiz.blog.domain.dtos;
+package com.DevWhiz.blog.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +11,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TagResponse {
+public class AuthorDto {
+
     private UUID id;
     private String name;
-    private Integer postCount;
+
 }

@@ -30,7 +30,7 @@ public class Post {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private PostStatus status;
+    private PostStatus postStatus;
 
     @Column(nullable = false)
     private Integer readingTime;
@@ -62,12 +62,12 @@ public class Post {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return Objects.equals(id, post.id) && Objects.equals(title, post.title) && Objects.equals(content, post.content) && status == post.status && Objects.equals(readingTime, post.readingTime) && Objects.equals(createAt, post.createAt) && Objects.equals(updateAt, post.updateAt);
+        return Objects.equals(id, post.id) && Objects.equals(title, post.title) && Objects.equals(content, post.content) && postStatus == post.postStatus && Objects.equals(readingTime, post.readingTime) && Objects.equals(createAt, post.createAt) && Objects.equals(updateAt, post.updateAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content, status, readingTime, createAt, updateAt);
+        return Objects.hash(id, title, content, postStatus, readingTime, createAt, updateAt);
     }
 
     @PrePersist
